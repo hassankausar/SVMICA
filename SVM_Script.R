@@ -22,10 +22,13 @@ library(ggplot2)
 
 # Initialising the directory and using the data for pre-process
 
-# setwd("C:/Users/Hassan/Desktop/Machine Learning ICA/Breast Cancer Data Hassan/ICA DATA AND SCRIPT/")
+# WORKING WITH THIS DATA FROM HOME
+setwd("C:/Users/Hassan/Desktop/Machine Learning ICA work/SVMICA")
 
+# WORKING WITH THIS DATA FROM UNI
+#setwd("U:/YEAR 3 COURSE WORK/ML ICA")
 
-setwd("U:/YEAR 3 COURSE WORK/ML ICA")
+#Loading the file to workspace
 BreastCancer <-  read.csv(file = "BreastCancerOriginal.data",stringsAsFactors = FALSE,header = TRUE)
 
 # Changing row names. Currently set from X1 to X5.
