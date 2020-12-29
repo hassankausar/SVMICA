@@ -71,11 +71,19 @@ BreastCancer <-
 # Checking the data summary which includes the Mean, Mode and Median.
 summary(BreastCancer)
 
+
+# Identifying the class type of Bare Nuclei Variable so then I can proceed with the data replacing.
+class(BreastCancer$Bare_Nuclei)
+
+# Summary() doesn't give any information at all for the Bare Nuclei variable apart from the length and the class (which are 'character').
+# Replacing to factor will help to get the mode as we will be working with that later.
 BreastCancer$Bare_Nuclei <- as.factor(BreastCancer$Bare_Nuclei)
+
+
 summary (BreastCancer$Bare_Nuclei[ BreastCancer$Class == "4"]) 
 summary (BreastCancer$Bare_Nuclei[ BreastCancer$Class == "2"]) 
 
-         
+
          
 #----------------------- Deleting and Replacing data  -------------------------
 
@@ -89,10 +97,6 @@ BreastCancer <-
 
 # Replacing the missing data by its mode for the Bare Nuclei variable.
 
-# Identifying the class type of Bare Nuclei Variable so then I can proceed with the data replacing.
-class(BreastCancer$Bare_Nuclei)
-
-
 # If the class is 4 the data will be replaced with 10.
 BreastCancer$Bare_Nuclei[BreastCancer$Bare_Nuclei == "?" &
                            BreastCancer$Class == "4"] <- "10"
@@ -102,15 +106,13 @@ BreastCancer$Bare_Nuclei[BreastCancer$Bare_Nuclei == "?" &
                            BreastCancer$Class == "2"] <- "1"
 
 
-
-# Summary() doesn't give you any information at all apart from the length and the class (which is 'character').
-# This function was used to identified the mode.
-BreastCancer$Bare_Nuclei <- as.factor(BreastCancer$Bare_Nuclei)
+#Checking the summary again to see everything is same or if it has changed.
 summary(BreastCancer)
 
+# Making sure the data is still classified as factor before checking it.
+BreastCancer$Bare_Nuclei <- as.factor(BreastCancer$Bare_Nuclei)
 
-
-#
+# An alternative to Summary, it displays the class type of each variable along with top 10 instances of data.
 str(BreastCancer)
 
 
@@ -176,6 +178,8 @@ confusionMatrix(table(test_pred, testing$Class))
 
 grid <-
   expand.grid(C = c(0, 0.01, 0.05, 0.1, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 5))
+
+
 svm_Linear_Grid <-
   train(
     Class ~ .,
