@@ -46,6 +46,7 @@ BreastCancer <-
            stringsAsFactors = FALSE,
            header = TRUE)
 
+#plot(BreastCancer$Bare_Nuclei, BreastCancer$Class, BreastCancer$Patient_ID)
 
 
 # Changing variable names. Currently set from X1 to X5.
@@ -80,11 +81,11 @@ class(BreastCancer$Bare_Nuclei)
 BreastCancer$Bare_Nuclei <- as.factor(BreastCancer$Bare_Nuclei)
 
 
-summary (BreastCancer$Bare_Nuclei[ BreastCancer$Class == "4"]) 
-summary (BreastCancer$Bare_Nuclei[ BreastCancer$Class == "2"]) 
+summary (BreastCancer$Bare_Nuclei[BreastCancer$Class == "4"])
+summary (BreastCancer$Bare_Nuclei[BreastCancer$Class == "2"])
 
 
-         
+
 #----------------------- Deleting and Replacing data  -------------------------
 
 
@@ -116,12 +117,21 @@ BreastCancer$Bare_Nuclei <- as.factor(BreastCancer$Bare_Nuclei)
 str(BreastCancer)
 
 
-#----------------------- Testing and Training the data  ------------------------
+#------------------- Data Slicing, Testing and Training ----------------------
 
+
+# Data slicing is a step to split data into train and test set.
+set.seed(483)
+
+# The method createDataPartition() is used for partitioning our data into train and test set.
+# The “Y” parameter takes the value of variable according to which data needs to be partitioned.
+# In my case, target variable is the Class Variable.
+
+# P shows the percentage of the split which should stand for 70%.
 
 #
-intrain <-
-  createDataPartition(y = BreastCancer$Class, p = 0.7, list = FALSE)
+
+intrain <-  createDataPartition(y = BreastCancer$Class, p = 0.7, list = FALSE)
 training <- BreastCancer[intrain, ]
 testing <- BreastCancer[-intrain, ]
 
