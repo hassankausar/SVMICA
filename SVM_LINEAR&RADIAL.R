@@ -116,7 +116,7 @@ str(BreastCancer)
 #------------------- Data Slicing, Testing and Training ----------------------
 
 # Data slicing is a step to split data into train and test set.
-set.seed(483)
+set.seed(123)
 
 # The method createDataPartition() is used for partitioning our data into train and test set.
 # The “Y” parameter takes the value of variable according to which data needs to be partitioned.
@@ -161,15 +161,25 @@ svm_Linear <- train(Class ~.,
 
 svm_Linear
 
+# HERE I WILL BE USING TWO DIFFERENT TECHNIQUES TO FIND THE PREDICTIONS AND FIND IF THEY RETURN THE SAME OR NOT.
 
-
+# Prediction 1
 TestPrediction <- predict(svm_Linear, newdata = Testing)
-
 TestPrediction
 
-confusionMatrix(table(TestPrediction, Testing$Class))
+# ConfusionMatrix 1
+ConfusionMatrix = confusionMatrix(table(TestPrediction, Testing$Class))
+ConfusionMatrix
 
 
+
+# Prediction 2
+TestPrediction2 = predict(svm_Linear, Testing)
+TestPrediction2
+
+# ConfusionMatrix 2
+ConfusionMatrix2=confusionMatrix(as.factor(Testing$Class),as.factor(TestPrediction2))
+ConfusionMatrix2
 
 
         #-------------------- SVM LINEAR GRID --------------------
