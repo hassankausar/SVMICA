@@ -113,7 +113,7 @@ str(BreastCancer)
 
 
 
-#------------------- Data Slicing, Testing and Training ----------------------
+#-------------- Data Slicing, Testing,  Training and Correlation --------------
 
 # Data slicing is a step to split data into train and test set.
 set.seed(123)
@@ -142,11 +142,8 @@ TrainControl <-
   trainControl(method = "repeatedcv", number = 10, repeats = 3)
 
 
-
-
-
-
-
+cor.test(BreastCancer$Uniformity_of_Cell_Size, BreastCancer$Class, 
+         conf.level = 0.95, alternative = "two.sided")
 
 
 # ----------------- SVM Classifier using Linear Kernel --------------------
@@ -171,6 +168,20 @@ TestPrediction
 ConfusionMatrix = confusionMatrix(table(TestPrediction, Testing$Class))
 ConfusionMatrix
 
+# Prediction 1
+table(TestPrediction, Testing$Class)
+
+# Prediction 1
+agreement <- TestPrediction == Testing$Class
+
+# Prediction 1
+table(agreement)
+
+# Prediction 1
+prop.table(table(agreement))
+
+
+
 
 
 # Prediction 2
@@ -180,6 +191,19 @@ TestPrediction2
 # ConfusionMatrix 2
 ConfusionMatrix2=confusionMatrix(as.factor(Testing$Class),as.factor(TestPrediction2))
 ConfusionMatrix2
+
+# Prediction 2
+table(TestPrediction2, Testing$Class)
+
+# Prediction 2
+agreement <- TestPrediction2 == Testing$Class
+
+# Prediction 2
+table(agreement)
+
+# Prediction 2
+prop.table(table(agreement))
+
 
 
         #-------------------- SVM LINEAR GRID --------------------
@@ -265,3 +289,43 @@ TestPrediction_Radial_Grid <- predict(svm_Radial_Grid, newdata = Testing)
 TestPrediction_Radial_Grid
 
 confusionMatrix(table(TestPrediction_Radial_Grid, Testing$Class))
+
+
+
+
+--------------------------------------------------------------------------------------------------------------
+# CHANGING IT WITH  LINEAR KERNEAL FUNCTION
+  
+  
+  
+  svm_Kernel <- ksvm (Class ~.,
+        data = Training, method = "svmRadial",
+        trControl = TrainControl, preProcess = c("center", "scale"),
+        tuneGrid = grid_Radial, tuneLength = 10, kernel = "vanilladot")
+
+
+svm_Kernel
+
+### evaluating model performance
+Kernel_Prediction <- predict(svm_Kernel, Testing)
+
+head(Kernel_Prediction)
+
+table(Kernel_Prediction, Testing$Class)
+
+agreement <- Kernel_Prediction == Testing$Class
+
+table(agreement)
+
+prop.table(table(agreement))
+--------------------------------------------------------------------------------
+### improving model performance
+### Gaussian RBF kernel
+letter_classifier_rbf <- ksvm(Class ~ ., data = Training,
+                              kernel = "rbfdot")
+letter_predictions_rbf <- predict(letter_classifier_rbf,
+                                  Testing)
+agreement_rbf <- letter_predictions_rbf == Testing$Class
+table(agreement_rbf)
+prop.table(table(agreement_rbf))
+
