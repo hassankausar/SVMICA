@@ -42,13 +42,13 @@ library(ROCR)
 
 # Initialising the directory and using the data for pre-process
 # WORKING WITH THIS DATA FROM HOME
-setwd("C:/Users/Hassan/Desktop/Machine Learning ICA work/SVMICA")
+setwd("C:/Users/Hassan/Desktop/ICA WORK SUBMISSION/Hassan Akhtar Kausar - V8039087/Part 1 - Video, Application/SVMICA")
 
-setwd("C:/Users/Hassan/Desktop/Machine Learning ICA work/SVMICA")
-
+#setwd("C/:Users/V8039087/Desktop/MACHINE LEARNING FULL ICA WORK/KNNICA-master/KNNICA-master")
 
 # WORKING WITH THIS DATA FROM UNI
 #setwd("U:/YEAR 3 COURSE WORK/ML ICA")
+
 
 
 
