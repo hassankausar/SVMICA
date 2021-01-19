@@ -361,8 +361,8 @@ confusionMatrix(table(TestPrediction_Radial, Testing$Class))
 
 grid_Radial <-
   expand.grid(
-    sigma = c(0, 0.01, 0.05, 0.1, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 5),
-    C =     c(0, 0.01, 0.05, 0.1, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 5)
+    sigma = c(0.01, 0.05, 0.1, 0.25, 0.5, 0.75, 1),
+    C =     c(0.01, 0.05, 0.1, 0.25, 0.5, 0.75, 1)
   )
 
 svm_Radial_Grid <- train(
